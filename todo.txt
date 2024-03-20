@@ -1,3 +1,12 @@
 - Basic django , templates , static , urls & settings.py setup Done
 
--
+- created base.html, login.html, login url
+    - created forms.py
+    - loginUser view Complete :)
+
+- logoutUser View , url Complete :)
+
+- created register.html, register Url
+    - created registerForm inside forms.py
+    - registerUser view Complete :)
+
