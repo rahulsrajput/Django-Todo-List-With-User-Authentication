@@ -8,4 +8,6 @@ urlpatterns = [
     path('register/', views.registerUser, name='register'),
 
     path('', views.task_list, name='home'),
+    path('add/', views.task_add, name='add'),
+    path('update/', views.task_update, name='update'),
 ]

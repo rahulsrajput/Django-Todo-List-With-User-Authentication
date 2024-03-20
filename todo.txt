@@ -12,6 +12,8 @@
 
 - added bootstrap class to forms field in forms.py file :) 
 
+- created task_form.html, created view for adding task, updating task :)
+
 - created task_list.html(home page) to render
   all task only for authenticated User.
     

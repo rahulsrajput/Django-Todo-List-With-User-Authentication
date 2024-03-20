@@ -48,8 +48,26 @@ def registerUser(request):
     return render(request, 'register.html', context={'form':form})
 
 
+
+
 def task_list(request):
     if request.user.is_authenticated:
         return render(request, 'task_list.html')
+    else:
+        return HttpResponseRedirect('/login')
+    
+def task_add(request):
+    page = 'add'
+
+    if request.user.is_authenticated:
+        return render(request, 'task_form.html', context={'page':page})
+    else:
+        return HttpResponseRedirect('/login')
+    
+def task_update(request):
+    page = 'update'
+
+    if request.user.is_authenticated:
+        return render(request, 'task_form.html', context={'page':page})
     else:
         return HttpResponseRedirect('/login')
