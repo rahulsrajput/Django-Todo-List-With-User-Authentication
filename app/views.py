@@ -46,3 +46,10 @@ def registerUser(request):
         form = registerForm()
     
     return render(request, 'register.html', context={'form':form})
+
+
+def task_list(request):
+    if request.user.is_authenticated:
+        return render(request, 'task_list.html')
+    else:
+        return HttpResponseRedirect('/login')

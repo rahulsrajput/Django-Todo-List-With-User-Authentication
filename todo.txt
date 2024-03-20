@@ -10,3 +10,10 @@
     - created registerForm inside forms.py
     - registerUser view Complete :)
 
+- added bootstrap class to forms field in forms.py file :) 
+
+- created task_list.html(home page) to render
+  all task only for authenticated User.
+    
+    - task_list(home) url done
+    - task_list view
