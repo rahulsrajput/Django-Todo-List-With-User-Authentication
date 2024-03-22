@@ -76,6 +76,13 @@
 
             <!-- body -->
             <div class="card-body">
+
+                {% for message in messages %}
+                <div class="alert alert-primary" role="alert">
+                    {{message}}
+                </div>
+                {% endfor %}
+
                 <form method="post">
                     {% csrf_token %}
                     

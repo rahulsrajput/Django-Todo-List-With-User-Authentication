@@ -19,6 +19,7 @@ def loginUser(request):
                 user_obj = authenticate(username=uname, password=upass)
                 if user_obj is not None:
                     login(request, user_obj)
+                    messages.success(request, 'Logged In..')
                     return HttpResponseRedirect('/')
                 
         form = loginForm()
@@ -29,6 +30,7 @@ def loginUser(request):
 def logoutUser(request):
     if request.user.is_authenticated:
         logout(request)
+        messages.success(request, 'Logged out..')
         return HttpResponseRedirect('/login')
     else:
         return HttpResponseRedirect('/login')
@@ -43,6 +45,7 @@ def registerUser(request):
             form = registerForm(request.POST)
             if form.is_valid():
                 form.save()
+                messages.success(request, 'Account Created..')
                 return HttpResponseRedirect('/login')
             
         form = registerForm()
@@ -77,6 +80,7 @@ def task_add(request):
             task = request.POST['task']
             current_user = request.user
             Task(task=task, user=current_user).save()
+            messages.success(request, 'Task Created..')
             return HttpResponseRedirect('/')
         
 
@@ -100,6 +104,7 @@ def task_update(request,pk):
             status = True if request.POST.get('checkbox') == 'on' else False
             
             Task(pk=pk, task=task, complete=status, user=current_user).save()
+            messages.success(request, 'Task Updated...')
             return HttpResponseRedirect('/')
         
         return render(request, 'task_form.html', context={'page':page, 'obj':obj, 'status':status})
@@ -110,4 +115,5 @@ def task_update(request,pk):
 def task_delete(request, pk):
     obj = Task.objects.get(pk=pk)
     obj.delete()
+    messages.success(request, 'Task Deleted..')
     return HttpResponseRedirect('/')

@@ -17,8 +17,8 @@
         border-bottom-right-radius: 5px;
     }
 
-    .list-group{
-        --mdb-list-group-item-padding-x: 0.9rem;
+    .list-group {
+        --mdb-list-group-item-padding-x: 0.6rem;
     }
 
     .list-group-item {
@@ -60,7 +60,7 @@
 
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <div>
-                            <h1 class="m-0">Hello {{request.user | title}} <i class="fas fa-tasks"></i></h1>
+                            <a href="{% url 'home' %}"><h2 class="m-0">Hello {{request.user | title}} <i class="fas fa-tasks"></i></h2></a>
                         </div>
                         <div>
                             <a href="{% url 'logout' %}">
@@ -72,11 +72,18 @@
 
                     <div class="card-body">
 
+                        {% for message in messages %}
+                        <div class="alert alert-primary" role="alert">
+                            {{message}}
+                        </div>
+                        {% endfor %}
+
                         <!-- search -->
                         <form action="" method="POST">
                             <div class="input-group mb-3">
                                 {% csrf_token %}
-                                <input type="text" class="form-control border-0 rounded-0" placeholder="Search tasks" name="search">
+                                <input type="text" class="form-control border-0 rounded-0" placeholder="Search tasks"
+                                    name="search">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-outline-secondary border-0 rounded-0"
                                         type="button"><i class="fas fa-search"></i></button>
@@ -90,7 +97,7 @@
                             <!-- Tasks will be added dynamically here -->
 
                             {% if objs %}
-                            
+
                             {% for obj in objs %}
                             <li class="list-group-item bg-transparent d-flex align-items-center">
 
