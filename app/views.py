@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import loginForm, registerForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
+from .models import Task
 
 # Create your views here.
 def loginUser(request):
@@ -50,24 +51,53 @@ def registerUser(request):
 
 
 
+
 def task_list(request):
     if request.user.is_authenticated:
-        return render(request, 'task_list.html')
+        objs = Task.objects.all()
+        return render(request, 'task_list.html', context={'objs':objs})
     else:
         return HttpResponseRedirect('/login')
     
+
 def task_add(request):
     page = 'add'
 
     if request.user.is_authenticated:
+        if request.method == 'POST':
+            task = request.POST['task']
+
+            Task(task=task).save()
+            return HttpResponseRedirect('/')
+        
+
         return render(request, 'task_form.html', context={'page':page})
     else:
         return HttpResponseRedirect('/login')
     
-def task_update(request):
-    page = 'update'
 
+def task_update(request,pk):
+    page = 'update'
     if request.user.is_authenticated:
-        return render(request, 'task_form.html', context={'page':page})
+        obj = Task.objects.get(pk=pk)
+        status = obj.complete
+
+        if request.method == 'POST':
+            task = request.POST['task']
+            
+            # print(task,status)
+            
+            status = True if request.POST.get('checkbox') == 'on' else False
+            
+            Task(pk=pk, task=task, complete=status).save()
+            return HttpResponseRedirect('/')
+        
+        return render(request, 'task_form.html', context={'page':page, 'obj':obj, 'status':status})
     else:
         return HttpResponseRedirect('/login')
+  
+    
+def task_delete(request, pk):
+    obj = Task.objects.get(pk=pk)
+    obj.delete()
+    return HttpResponseRedirect('/')

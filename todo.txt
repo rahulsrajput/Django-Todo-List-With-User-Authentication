@@ -19,3 +19,11 @@
     
     - task_list(home) url done
     - task_list view
+
+- created Task model in models.py file & registered that in admin.py file
+
+- add_task view done :)
+
+- delete_task view , url done :)
+
+- update_task view , url done [THIS IS IMP TAKE TIME TO UNDERSTAND]:)

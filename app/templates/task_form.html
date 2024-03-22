@@ -40,6 +40,9 @@
     }
 </style>
 
+
+
+
 <section>
 
     <div class="container">
@@ -70,19 +73,31 @@
             <div class="card-body">
                 <form method="post">
                     {% csrf_token %}
+                    
+                    {% if page == 'add' %}
                     <div class="form-group">
                         <label for="task">Task:</label>
                         <input type="text" class="form-control" id="task" placeholder="Enter task" name="task" value="">
                     </div>
+                    <button type="submit" class="btn btn-success btn-block mt-3">Add Task</button>
+                    
+                    {% else %}
+                    <div class="form-group">
+                        <label for="task">Task:</label>
+                        <input type="text" class="form-control" id="task" name="task" value="{{obj}}">
+                    </div>
                     <div class="form-check">
+                        
+                        {% if status %}
+                        <input type="checkbox" class="form-check-input" id="complete" name="checkbox" checked>
+                        {% else %}
                         <input type="checkbox" class="form-check-input" id="complete" name="checkbox">
+                        {% endif %}
+
                         <label class="form-check-label" for="complete">Completed</label>
                     </div>
-
-                    {% if page == 'add' %}
-                    <button type="submit" class="btn btn-success btn-block mt-3">Add Task</button>
-                    {% else %}
                     <button type="submit" class="btn btn-warning btn-block mt-3">Update Task</button>
+                    
                     {% endif %}
 
 
