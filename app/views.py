@@ -65,8 +65,10 @@ def task_list(request):
             objs = Task.objects.filter(task__icontains = search, user=current_user)
         else:
             objs = Task.objects.filter(user=current_user)
-        
-        return render(request, 'task_list.html', context={'objs':objs})
+            incomplete = Task.objects.filter(user=current_user, complete=False).count()
+            # print(incomplete)
+
+        return render(request, 'task_list.html', context={'objs':objs, 'incomplete':incomplete})
     
     else:
         return HttpResponseRedirect('/login')

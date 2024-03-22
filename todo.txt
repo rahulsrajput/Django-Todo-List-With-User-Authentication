@@ -43,3 +43,6 @@
 - vercel deployment changes :)
 
 - added message framework for messages :)
+
+- using query filter in task_list views showing logged-in user how many tasks 
+  are incomplete :)
