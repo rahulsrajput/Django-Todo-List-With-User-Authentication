@@ -36,3 +36,6 @@
   all its task also get deleted from DB) 
 
 - search filter done :)
+
+
+- changed database to postgres :)
