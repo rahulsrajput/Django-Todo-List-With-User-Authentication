@@ -1,7 +1,7 @@
 # Django-To-Do-list
 Django ToDo list app with User Registration, Login, Search and full Create Read Update and DELETE functionality..
 
-![DEMO](Screenshot.png)
+![DEMO](cover.png)
 
 # Clone the repository 
 ```bash 
