@@ -5,10 +5,11 @@
 {% block content %}
 
 <style>
-    body{
+    body {
         background-color: #f4f4f4;
 
     }
+
     /* Additional styling for the search bar and list items */
     .input-group-append button {
         border: none;
@@ -30,7 +31,7 @@
         /* Remove background color change on hover */
     }
 
-    
+
 
     /* Ensure task text starts immediately after the circle */
     .task-text {
@@ -56,14 +57,14 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="card-body">
 
                         <!-- search -->
                         <form action="" method="POST">
                             <div class="input-group mb-3">
                                 {% csrf_token %}
-                                <input type="text" class="form-control border-0 rounded-0" placeholder="Search tasks">
+                                <input type="text" class="form-control border-0 rounded-0" placeholder="Search tasks" name="search">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-outline-secondary border-0 rounded-0"
                                         type="button"><i class="fas fa-search"></i></button>
@@ -76,23 +77,31 @@
                         <ul class="list-group list-group-flush">
                             <!-- Tasks will be added dynamically here -->
 
+                            {% if objs %}
+                            
                             {% for obj in objs %}
                             <li class="list-group-item bg-transparent d-flex align-items-center">
-                                
+
                                 {% if obj.complete %}
                                 <div class="task-complete-icon"></div>
                                 <a href="{% url 'update' obj.id %}" class="task-text text-black"><s>{{obj.task}}</s></a>
-                                
+
                                 {% else %}
-                                
+
                                 <div class="task-incomplete-icon"></div>
                                 <a href="{% url 'update' obj.id %}" class="task-text text-black">{{obj.task}}</a>
                                 {% endif %}
 
                                 <a href="{% url 'delete' obj.id %}"><i class="fas fa-trash-alt text-danger"></i></a>
-                            
+
                             </li>
                             {% endfor %}
+
+                            {% else %}
+                            <li class="list-group-item bg-transparent d-flex align-items-center">
+                                <p class="">No Task Create Some Task</p>
+                            </li>
+                            {% endif %}
 
                         </ul>
 
@@ -100,7 +109,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="{% url 'add' %}"><input type="text" class="btn btn-dark w-25" value="Add Task" ></a>
+                        <a href="{% url 'add' %}"><input type="text" class="btn btn-dark w-25" value="Add Task"></a>
                     </div>
                 </div>
             </div>

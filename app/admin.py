@@ -4,4 +4,4 @@ from .models import Task
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    fields = ['task','description','complete']
+    fields = ['user','task','description','complete']

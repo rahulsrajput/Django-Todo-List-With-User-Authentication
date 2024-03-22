@@ -26,4 +26,13 @@
 
 - delete_task view , url done :)
 
-- update_task view , url done [THIS IS IMP TAKE TIME TO UNDERSTAND]:)
+- update_task view , url done, modified task_form & task_list.html
+  [THIS IS IMP TAKE TIME TO UNDERSTAND]:)
+
+- added user foreign key inside Task Class
+  (so that one to many relationship can happen[1 user <-> many task])
+  
+  (on_delete = models.CASCADE so that if user is deleted 
+  all its task also get deleted from DB) 
+
+- search filter done :)

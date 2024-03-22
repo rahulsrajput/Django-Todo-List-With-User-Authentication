@@ -54,8 +54,16 @@ def registerUser(request):
 
 def task_list(request):
     if request.user.is_authenticated:
-        objs = Task.objects.all()
+        current_user = request.user
+        
+        if request.method == 'POST':
+            search = request.POST['search']
+            objs = Task.objects.filter(task__icontains = search, user=current_user)
+        else:
+            objs = Task.objects.filter(user=current_user)
+        
         return render(request, 'task_list.html', context={'objs':objs})
+    
     else:
         return HttpResponseRedirect('/login')
     
@@ -66,8 +74,8 @@ def task_add(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             task = request.POST['task']
-
-            Task(task=task).save()
+            current_user = request.user
+            Task(task=task, user=current_user).save()
             return HttpResponseRedirect('/')
         
 
@@ -84,12 +92,13 @@ def task_update(request,pk):
 
         if request.method == 'POST':
             task = request.POST['task']
+            current_user = request.user
             
             # print(task,status)
             
             status = True if request.POST.get('checkbox') == 'on' else False
             
-            Task(pk=pk, task=task, complete=status).save()
+            Task(pk=pk, task=task, complete=status, user=current_user).save()
             return HttpResponseRedirect('/')
         
         return render(request, 'task_form.html', context={'page':page, 'obj':obj, 'status':status})
