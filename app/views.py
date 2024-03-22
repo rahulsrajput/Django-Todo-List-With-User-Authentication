@@ -3,6 +3,7 @@ from .forms import loginForm, registerForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from .models import Task
+from django.contrib import messages
 
 # Create your views here.
 def loginUser(request):
