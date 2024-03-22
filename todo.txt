@@ -39,3 +39,5 @@
 
 
 - changed database to postgres :)
+
+- vercel deployment changes :)
